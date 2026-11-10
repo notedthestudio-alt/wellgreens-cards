@@ -106,6 +106,12 @@ mark{background:none;color:var(--green);font-weight:900}
 .media::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 30%,rgba(255,255,255,.10),transparent 70%);transition:opacity .5s var(--ease);z-index:-1}
 .media::after{content:"";position:absolute;left:18%;right:18%;bottom:12%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);z-index:-1}
 .tile-black .media{background:radial-gradient(120% 90% at 50% 34%,#2a2f2c 0%,#151816 50%,#070908 100%)}
+.tile-white .media{background:radial-gradient(120% 90% at 50% 34%,#ffffff 0%,#f7f8f6 55%,#eceeeb 100%);box-shadow:inset 0 0 0 1px #e4e7e3}
+.tile-white .media::before{opacity:0}
+.tile-white .media::after{background:radial-gradient(closest-side,rgba(16,22,20,.18),transparent)}
+.tile-white .media img{filter:drop-shadow(0 8px 12px rgba(16,22,20,.14))}
+.tile-white .pill{background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(16,22,20,.18)}
+.tile-white .qa{box-shadow:0 0 0 1px #e4e7e3,0 4px 12px rgba(16,22,20,.12)}
 .media{transition:background .5s var(--ease)}
 .media img{position:absolute;left:12%;top:16%;width:76%;height:70%;object-fit:contain;object-position:50% 100%;display:block;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transition:transform .6s var(--ease)}
 .card:hover .media img{transform:translateY(-3px) scale(1.03)}
@@ -219,7 +225,7 @@ mark{background:none;color:var(--green);font-weight:900}
     <div class="eyebrow">Wellgreens · Product cards v5 · Vista</div>
     <h1>Seamless photos, real deal badges.</h1>
     <p>Products are cut out and set on one consistent tile, deals sit in a corner ribbon, and shoppers can switch every weight between grams and ounces.</p>
-    <div class="tiles" id="tiles" role="group" aria-label="Tile color"><small>Tile</small><button data-t="green" aria-pressed="true"><i style="background:radial-gradient(circle at 50% 38%,#2a7a5b,#0f3a2b)"></i>Dark green</button><button data-t="black" aria-pressed="false"><i style="background:radial-gradient(circle at 50% 38%,#2a2f2c,#0b0d0c)"></i>Black</button></div>
+    <div class="tiles" id="tiles" role="group" aria-label="Tile color"><small>Tile</small><button data-t="green" aria-pressed="true"><i style="background:radial-gradient(circle at 50% 38%,#2a7a5b,#0f3a2b)"></i>Dark green</button><button data-t="black" aria-pressed="false"><i style="background:radial-gradient(circle at 50% 38%,#2a2f2c,#0b0d0c)"></i>Black</button><button data-t="white" aria-pressed="false"><i style="background:#fff;box-shadow:inset 0 0 0 1.5px #c3c9c5"></i>White</button></div>
     <ol>
       <li><span><b>Search first.</b> The bar cycles through suggestions. Tap it to see popular searches, then type to filter live.</span></li>
       <li><span><b>Tap +</b> on a photo. It turns into a quantity stepper and the item glides into the cart.</span></li>
@@ -527,7 +533,7 @@ placeUnits(); addEventListener("resize",placeUnits); document.fonts&&document.fo
 // review-only: tile color
 document.querySelectorAll("#tiles button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll("#tiles button").forEach(x=>x.setAttribute("aria-pressed",x===b));
-  $(".phone").classList.toggle("tile-black", b.dataset.t==="black");
+  $(".phone").classList.toggle("tile-black", b.dataset.t==="black"); $(".phone").classList.toggle("tile-white", b.dataset.t==="white");
 }));
 </script>
 </body>
