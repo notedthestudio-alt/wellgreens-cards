@@ -224,7 +224,7 @@ mark{background:none;color:var(--green);font-weight:900}
       <li><span><b>Search first.</b> The bar cycles through suggestions. Tap it to see popular searches, then type to filter live.</span></li>
       <li><span><b>Tap +</b> on a photo. It turns into a quantity stepper and the item glides into the cart.</span></li>
       <li><span><b>Switch sizes.</b> The weight pill and price roll to the new value and the selector slides over.</span></li>
-      <li><span><b>Tap g / oz</b> in the header. Every pill and picker rolls to grams or ounces, and the choice is remembered.</span></li>
+      <li><span><b>Tap g / oz</b> in the header. Every pill, picker and price-per rolls between grams and ounces.</span></li>
       <li><span><b>Watch the cart bar.</b> It shows savings and fills a progress bar toward the deal.</span></li>
       <li><span><b>Best value</b> sorts by price per gram and reveals that number on each card, only when you ask for it.</span></li>
     </ol>
@@ -313,7 +313,7 @@ const P = [
     meta:["offer","BOGO 50% off"], unit:"preroll",
     deal:{label:()=>"BOGO 50% off", need:2, onlySize:null, save:(units,price)=>Math.floor(units/2)*price*0.5} }
 ];
-let UNIT = (()=>{ try{ return localStorage.getItem("wg-unit")||"g" }catch(e){ return "g" } })();
+let UNIT = "g"; // live build would remember this per shopper
 const OZ = {"3.5G":"1/8 OZ","7G":"1/4 OZ","14G":"1/2 OZ","28G":"1 OZ"};
 const lab = z => UNIT==="oz" ? z.oz : z.w;      // size label in the shopper's chosen units
 const L = w => UNIT==="oz" ? (OZ[w]||w) : w;     // same, from a gram key
@@ -508,11 +508,11 @@ setInterval(()=>{ if(q.value||matchMedia("(prefers-reduced-motion: reduce)").mat
 addEventListener("resize",()=>P.forEach(placeThumb));
 document.fonts && document.fonts.ready.then(()=>P.forEach(placeThumb));
 
-// g / oz switch: everything rolls to the new units, choice is remembered
+// g / oz switch: everything rolls to the new units
 const us=$("#units");
 function placeUnits(){ const b=us.querySelector(`button[data-u="${UNIT}"]`), t=us.querySelector(".ut"); t.style.width=b.offsetWidth+"px"; t.style.transform=`translateX(${b.offsetLeft-3}px)`; }
 function setUnits(u){
-  if(u===UNIT) return; UNIT=u; buzz(); try{ localStorage.setItem("wg-unit",u) }catch(e){}
+  if(u===UNIT) return; UNIT=u; buzz();
   us.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.u===u)); placeUnits();
   P.forEach(p=>{ const c=$(`#c-${p.id}`);
     swap(c.querySelector(".pill"), lab(p.sizes[p.sel]));
