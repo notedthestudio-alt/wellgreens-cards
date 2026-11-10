@@ -130,6 +130,10 @@ mark{background:none;color:var(--green);font-weight:900}
 .media:has(.qa.open) .tag{opacity:0;transform:translateX(-6px)}
 .tag.deal{background:var(--deal)} .tag.excl{background:var(--ink)}
 
+/* strain: icon + type under the name */
+.strain{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;letter-spacing:.01em;margin-top:-1px}
+.strain svg{width:14px;height:14px;flex:none}
+.strain.Indica{color:#5b4bb7} .strain.Sativa{color:#b45309} .strain.Hybrid{color:#1f6b4f}
 /* Manny's pill, with a crossfade/slide when the size changes */
 .pill{position:absolute;right:8px;bottom:8px;height:28px;padding:0 11px;border-radius:999px;background:#fff;color:var(--green-d);font-size:13px;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:width .35s var(--ease)}
 .pill span{display:block;white-space:nowrap}
@@ -299,6 +303,9 @@ mark{background:none;color:var(--green);font-weight:900}
 
 <script>
 const IC = {
+  Indica:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>',
+  Sativa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></svg>',
+  Hybrid:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>',
   plus:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
   minus:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>',
   clock:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
@@ -349,7 +356,8 @@ function cardHTML(p,i){
       <span class="pill"><span class="in">${lab(s)}</span></span>
     </div>
     <div class="info">
-      <div class="name"><span class="dot ${p.strain}" title="${p.strain}" aria-label="${p.strain}"></span><span class="nm">${p.name}</span></div>
+      <div class="name"><span class="nm">${p.name}</span></div>
+      <div class="strain ${p.strain}">${IC[p.strain]}<span>${p.strain}</span></div>
       <div class="priceline"><span class="price"><span class="in">${fmt(s.p)}</span></span><span class="was">${s.was?fmt(s.was):""}</span></div>
       <div class="unit"></div>
       ${seg}
