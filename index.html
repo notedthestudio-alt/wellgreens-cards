@@ -37,7 +37,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webki
 .screen::-webkit-scrollbar{display:none}
 
 /* ---------- app header ---------- */
-.top{position:sticky;top:0;z-index:5;background:var(--green-d);color:#fff;padding:18px 18px 14px;border-radius:0 0 22px 22px}
+.top{position:sticky;top:0;z-index:5;background:var(--green-d);transition:background .45s var(--ease);color:#fff;padding:18px 18px 14px;border-radius:0 0 22px 22px}
 .loc{display:flex;justify-content:space-between;align-items:center}
 .loc small{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
 .loc strong{font-size:20px;font-weight:900;letter-spacing:-.02em}
@@ -105,6 +105,9 @@ mark{background:none;color:var(--green);font-weight:900}
   background:radial-gradient(120% 90% at 50% 34%,#2a7a5b 0%,#174f3b 48%,#0c3125 100%)}
 .media::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 30%,rgba(255,255,255,.10),transparent 70%);transition:opacity .5s var(--ease);z-index:-1}
 .media::after{content:"";position:absolute;left:18%;right:18%;bottom:12%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);z-index:-1}
+.nav-black .top{background:#0d0f0e}
+.nav-black .cats,.nav-black .units{background:rgba(255,255,255,.13)}
+.nav-black .badge{box-shadow:0 0 0 2px #0d0f0e}
 .tile-black .media{background:radial-gradient(120% 90% at 50% 34%,#2a2f2c 0%,#151816 50%,#070908 100%)}
 .tile-white .media{background:radial-gradient(120% 90% at 50% 34%,#ffffff 0%,#f7f8f6 55%,#eceeeb 100%);box-shadow:inset 0 0 0 1px #e4e7e3}
 .tile-white .media::before{opacity:0}
@@ -224,8 +227,8 @@ mark{background:none;color:var(--green);font-weight:900}
   <section class="intro">
     <div class="eyebrow">Wellgreens · Product cards v5 · Vista</div>
     <h1>Seamless photos, real deal badges.</h1>
-    <p>Products are cut out and set on one consistent tile, deals sit in a corner ribbon, and shoppers can switch every weight between grams and ounces.</p>
-    <div class="tiles" id="tiles" role="group" aria-label="Tile color"><small>Tile</small><button data-t="green" aria-pressed="true"><i style="background:radial-gradient(circle at 50% 38%,#2a7a5b,#0f3a2b)"></i>Dark green</button><button data-t="black" aria-pressed="false"><i style="background:radial-gradient(circle at 50% 38%,#2a2f2c,#0b0d0c)"></i>Black</button><button data-t="white" aria-pressed="false"><i style="background:#fff;box-shadow:inset 0 0 0 1.5px #c3c9c5"></i>White</button></div>
+    <p>Products are cut out and set on clean white tiles, deals sit in a corner ribbon, and shoppers can switch every weight between grams and ounces.</p>
+    <div class="tiles" id="tiles" role="group" aria-label="Nav bar color"><small>Nav bar</small><button data-t="green" aria-pressed="true"><i style="background:#174f3b"></i>Dark green</button><button data-t="black" aria-pressed="false"><i style="background:#0d0f0e"></i>Black</button></div>
     <ol>
       <li><span><b>Search first.</b> The bar cycles through suggestions. Tap it to see popular searches, then type to filter live.</span></li>
       <li><span><b>Tap +</b> on a photo. It turns into a quantity stepper and the item glides into the cart.</span></li>
@@ -237,7 +240,7 @@ mark{background:none;color:var(--green);font-weight:900}
     <p class="fine">Prototype. Prices are from the Vista menu on Nov 10, 2026. Deal and savings math is illustrative; checkout calculates the real totals.</p>
   </section>
 
-  <div class="phone">
+  <div class="phone tile-white">
     <div class="screen" id="screen">
       <header class="top">
         <div class="loc">
@@ -533,7 +536,7 @@ placeUnits(); addEventListener("resize",placeUnits); document.fonts&&document.fo
 // review-only: tile color
 document.querySelectorAll("#tiles button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll("#tiles button").forEach(x=>x.setAttribute("aria-pressed",x===b));
-  $(".phone").classList.toggle("tile-black", b.dataset.t==="black"); $(".phone").classList.toggle("tile-white", b.dataset.t==="white");
+  $(".phone").classList.toggle("nav-black", b.dataset.t==="black");
 }));
 </script>
 </body>
