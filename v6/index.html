@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Wellgreens Product Cards v6 · Vista · 2-column grid</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23174f3b%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 font-family=%22Arial%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%23f1ead9%22%3EW%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
 <style>
@@ -65,6 +66,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webki
 .cats svg{width:16px;height:16px}
 .chips{display:flex;gap:8px;padding:14px 18px 0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .chips::-webkit-scrollbar{display:none}
+.chips::after{content:"";flex:0 0 10px}
+.chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
 .chip{flex:none;height:34px;padding:0 14px;border-radius:999px;border:1.5px solid #c3c9c5;background:#fff;font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .chip svg{width:14px;height:14px}
@@ -229,6 +232,11 @@ mark{background:none;color:var(--green);font-weight:900}
   .intro{display:none}
   .phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}
 }
+/* tablets: keep the 2-column grid at a comfortable phone-like width instead of stretching */
+@media (min-width:600px) and (max-width:820px){
+  .stage{display:flex;justify-content:center;padding:24px 0}
+  .phone{width:520px;height:calc(100dvh - 48px);border-radius:28px;box-shadow:0 30px 60px -20px rgba(16,22,20,.3)}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
@@ -331,7 +339,7 @@ const P = [
     deal:{label:()=>`10% off any two ${L("14G")}`, need:2, onlySize:"14G", save:(units,price)=>Math.floor(units/2)*2*price*0.10} },
   { id:"bg", cat:"flower", img:"img/blackgold-cut.webp", name:"Black Gold OG", brand:"City Roots", strain:"Hybrid", thc:"31% THC",
     tag:["deal","2 FOR $60"], house:true,
-    sizes:[{w:"7G",oz:"1/4 OZ",g:7,p:41.99},{w:"14G",oz:"1/2 OZ",g:14,p:60.00},{w:"28G",oz:"1 OZ",g:28,p:109.00}], sel:2,
+    sizes:[{w:"7G",oz:"1/4 OZ",g:7,p:41.99},{w:"14G",oz:"1/2 OZ",g:14,p:60.00},{w:"28G",oz:"1 OZ",g:28,p:109.00}], sel:0,
     meta:["offer","2 for $60 on 7G"], unit:"g",
     deal:{label:()=>`2 for $60 on ${L("7G")}`, need:2, onlySize:"7G", save:(units,price)=>Math.floor(units/2)*(2*price-60)} },
   { id:"la", cat:"preroll", img:"img/laconf-cut.webp", name:"L.A. Confidential", brand:"City Roots", strain:"Indica", thc:"28% THC",
